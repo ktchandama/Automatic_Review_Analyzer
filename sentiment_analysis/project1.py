@@ -17,6 +17,7 @@ def get_order(n_samples):
         return indices
 
 
+    
 def hinge_loss_single(feature_vector, label, theta, theta_0):
     """
     Finds the hinge loss on a single data point given specific classification
@@ -33,7 +34,7 @@ def hinge_loss_single(feature_vector, label, theta, theta_0):
     Returns: A real number representing the hinge loss associated with the
     given data point and parameters.
     """
-    # Your code here
+    return max(0, 1 - label*(theta.T.dot(feature_vector) + theta_0))
     raise NotImplementedError
 
 
@@ -55,7 +56,10 @@ def hinge_loss_full(feature_matrix, labels, theta, theta_0):
     given dataset and parameters. This number should be the average hinge
     loss across all of the points in the feature matrix.
     """
-    # Your code here
+    h_loss = 1 - labels*(np.dot(theta, feature_matrix.T) + theta_0)
+    h_loss[h_loss < 0] = 0
+    
+    return h_loss.mean()
     raise NotImplementedError
 
 
