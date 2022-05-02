@@ -2,9 +2,7 @@ import project1 as p1
 import utils
 import numpy as np
 
-#-------------------------------------------------------------------------------
-# Data loading. There is no need to edit code in this section.
-#-------------------------------------------------------------------------------
+#Test data loading
 
 train_data = utils.load_data('reviews_train.tsv')
 val_data = utils.load_data('reviews_val.tsv')
@@ -20,9 +18,7 @@ train_bow_features = p1.extract_bow_feature_vectors(train_texts, dictionary)
 val_bow_features = p1.extract_bow_feature_vectors(val_texts, dictionary)
 test_bow_features = p1.extract_bow_feature_vectors(test_texts, dictionary)
 
-#-------------------------------------------------------------------------------
-# Problem 5
-#-------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
 
 # toy_features, toy_labels = toy_data = utils.load_toy_data('toy_data.tsv')
 #
@@ -43,8 +39,6 @@ test_bow_features = p1.extract_bow_feature_vectors(test_texts, dictionary)
 # plot_toy_results('Pegasos', thetas_pegasos)
 
 #-------------------------------------------------------------------------------
-# Problem 7
-#-------------------------------------------------------------------------------
 
 # T = 10
 # L = 0.01
@@ -64,8 +58,6 @@ test_bow_features = p1.extract_bow_feature_vectors(test_texts, dictionary)
 # print("{:50} {:.4f}".format("Training accuracy for Pegasos:", avg_peg_train_accuracy))
 # print("{:50} {:.4f}".format("Validation accuracy for Pegasos:", avg_peg_val_accuracy))
 
-#-------------------------------------------------------------------------------
-# Problem 8
 #-------------------------------------------------------------------------------
 
 # data = (train_bow_features, train_labels, val_bow_features, val_labels)
