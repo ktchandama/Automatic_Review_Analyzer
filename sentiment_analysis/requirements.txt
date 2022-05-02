@@ -2,5 +2,8 @@ os
 sys
 time
 traceback
+string
+random
 numpy
+pandas
 matplotlib
