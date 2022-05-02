@@ -220,6 +220,15 @@ def pegasos_single_step_update(
     completed.
     """
     # Your code here
+    agreement = float(label*(current_theta.dot(feature_vector) + current_theta_0))
+    
+    if agreement <= 1.0:
+        current_theta = (1-eta*L)*current_theta + eta*label*feature_vector
+        current_theta_0 = current_theta_0 + eta*label
+    else:
+        current_theta = (1-eta*L)*current_theta
+        
+    return (current_theta, current_theta_0)
     raise NotImplementedError
 
 
@@ -253,6 +262,23 @@ def pegasos(feature_matrix, labels, T, L):
     parameter, found after T iterations through the feature matrix.
     """
     # Your code here
+    # Counter
+    c = 1
+    
+    # Initialize theta and theta0
+    current_theta = np.zeros(feature_matrix.shape[1])
+    current_theta_0 = 0.0
+    
+    for t in range(T):
+        for i in get_order(feature_matrix.shape[0]):
+            eta_t = 1/np.sqrt(c)  # Update eta every iteration
+            c += 1 # Update counter
+            
+            # Run pegasos algorithm to get theta and theta0
+            current_theta, current_theta_0 = pegasos_single_step_update(feature_matrix[i,:], \
+             labels[i], L, eta_t, current_theta, current_theta_0)
+            
+    return (current_theta, current_theta_0)
     raise NotImplementedError
 
 # Part II
@@ -276,8 +302,16 @@ def classify(feature_matrix, theta, theta_0):
     be considered a positive classification.
     """
     # Your code here
+    # Tolerance
+    eps = 1e-8
+    
+    predictions = theta.dot(feature_matrix.T) + theta_0
+    predictions[predictions > 0.0] = 1
+    predictions[predictions < 0.0] = -1
+    predictions[abs(predictions) < eps] = -1
+    
+    return predictions
     raise NotImplementedError
-
 
 def classifier_accuracy(
         classifier,
@@ -312,6 +346,18 @@ def classifier_accuracy(
     accuracy of the trained classifier on the validation data.
     """
     # Your code here
+    # Train the algorithm to get theta, theta0
+    theta, theta_0 = classifier(train_feature_matrix, train_labels, **kwargs)
+    
+    # Use these parameters to get predictions for training and validation sets
+    pred_train = classify(train_feature_matrix, theta, theta_0)
+    pred_val = classify(val_feature_matrix, theta, theta_0)
+    
+    # Calculate classification accuracy by comparing predictions with labels
+    train_accuracy = accuracy(pred_train, train_labels)
+    val_accuracy = accuracy(pred_val, val_labels)
+    
+    return (train_accuracy, val_accuracy)
     raise NotImplementedError
 
 
