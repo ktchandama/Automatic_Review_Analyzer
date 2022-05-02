@@ -19,3 +19,11 @@ In order to automatically analyze reviews, we need to complete the following tas
 
 3. Experiment with additional features and explore their impact on classifier performance.
 
+
+project1.py contains various useful functions that will be used to implement your learning algorithms.
+
+main.py is a script skeleton where these functions are called and you can run your experiments.
+
+utils.py contains utility functions that the staff has implemented for you.
+
+test.py is a script which runs tests on a few of the methods we implement. Note that these tests are provided to help debug our implementation.
